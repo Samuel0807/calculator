@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>服务费计算器</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="swiper-3.4.0.min.css">
+</head>
+<body>
+<div class="content">
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="http://n.sinaimg.cn/blog/20161207/6Apd-fxyiayq2645165.jpg" ></div>
+            <div class="swiper-slide"><img src="http://n.sinaimg.cn/blog/20161207/6Apd-fxyiayq2645165.jpg" ></div>
+            <div class="swiper-slide"><img src="http://n.sinaimg.cn/blog/20161207/6Apd-fxyiayq2645165.jpg" ></div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="tenderType">
+        <label class="hintLabel">请选择招标类型</label>
+        <select id="selectType" class="tenderInput">
+            <option selected="selected">货物招标</option>
+            <option>服务招标</option>
+            <option>工程招标</option>
+        </select>
+    </div>
+    <div class="tenderAmount">
+        <label class="hintLabel">请输入中标金额</label>
+        <input type="text" placeholder="单位(万元)"  value="" id="amount" class="tenderInput">
+    </div>
+    <div class="calculateResult">
+        <table border="1" bordercolor="#fff" style="border-collapse: collapse;">
+            <tbody>
+                <tr>
+                    <th width=31% >中标金额（万元）</th>
+                    <th width=23% >工程招标</th>
+                    <th width=23% >服务招标</th>
+                    <th width=23% >货物招标</th>
+                </tr>
+                <tr class="odd">
+                    <td>0-100</td>
+                    <td>1.0%</td>
+                    <td>1.5%</td>
+                    <td>1.5%</td>
+                </tr>
+                <tr class="even">
+                    <td>100-500</td>
+                    <td>0.7%</td>
+                    <td>0.8%</td>
+                    <td>1.1%</td>
+                </tr>
+                <tr class="odd">
+                    <td>500-1000</td>
+                    <td>0.55%</td>
+                    <td>0.45%</td>
+                    <td>0.8%</td>
+                </tr>
+                <tr class="even">
+                    <td>1000-5000</td>
+                    <td>0.35%</td>
+                    <td>0.25%</td>
+                    <td>0.5%</td>
+                </tr>
+                <tr class="odd">
+                    <td>5000-10000</td>
+                    <td>0.2%</td>
+                    <td>0.1%</td>
+                    <td>0.25%</td>
+                </tr>
+                <tr class="even">
+                    <td>10000-100000</td>
+                    <td>0.05%</td>
+                    <td>0.05%</td>
+                    <td>0.05%</td>
+                </tr>
+                <tr class="odd">
+                    <td>100000以上</td>
+                    <td>0.01%</td>
+                    <td>0.01%</td>
+                    <td>0.01%</td>
+                </tr>
+            </tbody>
+        </table>
+        <label class="resultLabel">代理费合计</label>
+        <label id="totalcost">0.00</label>
+        <label class="resultLabel" id="preferentialLabel">优惠比例</label>
+        <label id="preferentialRate">100%</label>
+        <br>
+        <label class="resultLabel" id="afterLabel">优惠后代理费</label>
+        <label id="proxy">0</label>
+    </div>
+    <div class="calcute-container">
+        <button onclick="calculate()">开始计算</button>
+    </div>
+</div>
+<script type="text/javascript">
+    function calculate(){
+
+        var currentType = document.getElementById("selectType").value;
+        var ratio1,ratio2,ratio3,ratio4,ratio5,ratio6,ratio7;
+        switch (currentType){
+            case "货物招标":
+                ratio1 = 0.015;
+                ratio2 = 0.011;
+                ratio3 = 0.008;
+                ratio4 = 0.005;
+                ratio5 = 0.0025;
+                ratio6 = 0.0005;
+                ratio7 = 0.0001;
+                break;
+            case "服务招标":
+                ratio1 = 0.015;
+                ratio2 = 0.008;
+                ratio3 = 0.0045;
+                ratio4 = 0.0025;
+                ratio5 = 0.001;
+                ratio6 = 0.0005;
+                ratio7 = 0.0001;
+                break;
+            case "工程招标":
+                ratio1 = 0.01;
+                ratio2 = 0.007;
+                ratio3 = 0.0055;
+                ratio4 = 0.0035;
+                ratio5 = 0.002;
+                ratio6 = 0.0005;
+                ratio7 = 0.0001;
+                break;
+        }
+
+        var amount = document.getElementById("amount").value;
+        var cost;
+        console.log(amount);
+        console.log(currentType);
+        if (amount<0) {
+            return;
+        }else if (amount<100){
+            cost = ratio1 * amount;
+        }else if (amount<500){
+            cost = ratio1 * 100 + ratio2 * (amount -100);
+        }else if (amount<1000){
+            cost = ratio1 * 100 + ratio2 * 400 + ratio3 * (amount - 500);
+        }else if (amount<5000){
+            cost = ratio1 * 100 + ratio2 * 400 + ratio3 * 500 + ratio4 * (amount - 1000);
+        }else if (amount<10000){
+            cost = ratio1 * 100 + ratio2 * 400 + ratio3 * 500 + ratio4 * 4000 + ratio5 *(amount -5000);
+        }else if (amount<100000){
+            cost = ratio1 * 100 + ratio2 * 400 + ratio3 * 500 + ratio4 * 4000 + ratio5 * 5000 * ratio6 * (amount - 10000);
+        }else{
+            cost = ratio1 * 100 + ratio2 * 400 + ratio3 * 500 + ratio4 * 4000 + ratio5 * 5000 * ratio6 * 90000 + ratio7 * (amount-100000);
+        }
+        var totalLabel = document.getElementById("totalcost");
+        totalLabel.innerHTML = cost;
+    }
+</script>
+<script type="text/javascript" src="swiper-3.4.0.min.js"></script>
+<script>
+    var mySwiper = new Swiper ('.swiper-container', {
+        direction: 'horizontal',
+        loop: true,
+        // 如果需要分页器
+        pagination: '.swiper-pagination',
+        autoplay:3000
+    })
+</script>
+</body>
+</html>

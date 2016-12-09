@@ -1,0 +1,105 @@
+body{
+    font-family: "Microsoft Yahei";
+}
+
+.swiper-container{
+    width: 100%;
+    height: 140px;
+    margin-bottom: 20px;
+}
+
+.swiper-container img{
+    display: inline-block;
+    width:100%;
+}
+
+.content{
+    padding: 20px 10px;
+ }
+
+.hintLabel{
+    font-weight: bold;
+    display: inline-block;
+    width: 30%;
+}
+.tenderInput{
+    margin-top: 10px;
+    display: inline-block;
+    width: 66%;
+    background-color:rgb(236,245,252);
+    border-style: none;
+    height: 30px;
+}
+
+#amount{
+    border-radius:4px ;
+    padding: 0 1%;
+}
+
+#selectType{
+    width: 68%;
+    color: gray;
+}
+
+table{
+    background: #cccccc;
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+table th{
+    height: 30px;
+    background:rgb(4,154,215) ;
+    color: white;
+}
+
+table td{
+    height: 26px;
+}
+
+.odd td{
+    background:rgb(200,230,245) ;
+}
+
+.even td{
+    background: rgb(239,247,252);
+}
+
+.resultLabel{
+    display: inline-block;
+    width: 25%;
+}
+
+#preferentialLabel{
+    margin-left:20px;
+    margin-top: 20px;
+}
+
+#afterLabel{
+    margin-top:10px;
+}
+
+#totalcost,#proxy,#preferentialRate{
+    display:inline-block;
+    width: 15%;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    color: orange;
+}
+
+.calcute-container{
+    margin: 20px 0;
+    width: 100%;
+    text-align: center;
+}
+
+.calcute-container button{
+    border-style: none;
+    border-radius: 4px;
+    background: rgb(200,230,245);
+    width: 100px;
+    height: 30px;
+    color: #000000;
+    font: 16px bold;
+}
